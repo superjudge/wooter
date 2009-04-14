@@ -1,0 +1,15 @@
+{% extends "woot/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <h1>
+        {% trans "Join the movement!" %}
+    </h1>
+    
+    <form method="post" action=".">
+        <table>{{ form }}</table>
+        
+        <input type="submit" value="Signup" />
+    </form>    
+{% endblock %}

@@ -1,0 +1,12 @@
+Wooter is very simple Twitter clone. The purpose of Wooter is to
+serve as an educational project, where different features of
+Django and Python can be exemplified and explained.
+
+In particular, the current data model of Wooter is naïve, and
+will most likely break down for moderate amounts of users and
+traffic.
+
+Wooter is still very much work in progress.
+
+
+Copyright (c) 2009, Johan Liseborn <johan.liseborn@gmail.com>

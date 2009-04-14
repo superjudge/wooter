@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Wooter</title>
+        <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+
+        {% block head %}{% endblock head %}
+    </head>
+
+    <body>
+        <div id="doc" class="yui-t5">
+            <div id="hd" role="banner">
+                {% block header %}{% endblock header %}
+            </div> <!-- hd -->
+
+            <div id="bd" role="main">
+	            <div id="yui-main">
+	                <div class="yui-b">
+	                    <div class="yui-g">
+                            {% block content %}{% endblock content %}
+	                    </div>
+                    </div>
+	            </div>
+	        
+	            <div class="yui-b">
+	                {% block navigation %}{% endblock %}
+	            </div>	
+	        </div> <!-- bd -->
+
+            <div id="ft" role="contentinfo">
+                {% block footer %}{% endblock footer %}
+            </div> <!-- ft -->
+        </div> <!-- doc -->
+    </body>
+</html>

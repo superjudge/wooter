@@ -1,0 +1,57 @@
+{% extends "woot/yui.html" %}
+
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+
+{% block head %}
+    <style type="text/css">
+        @import url("/static/style/layout.css");
+        @import url("/static/style/type.css");
+        @import url("/static/style/color.css");
+    </style>
+
+    {% comment %}        
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="/static/js/site.js"></script>        
+    {% endcomment %}
+{% endblock head %}
+
+{% block header %}
+    {% if user.is_authenticated %}
+        <div id='login-menu'><a href="{% url home %}">{% trans "home" %}</a> &#124; <a href="{% url user-profile user.username %}">{% trans "profile" %}</a> &#124; <a href=".">{% trans "find people" %}</a> &#124; <a href="{% url settings %}">{% trans "settings" %}</a> &#124; <a href="/doc/en/_build/html/index.html" target="_blank">{% trans "help" %}</a> &#124; <a href="{% url logout %}">{% trans "sign out" %}</a></div>
+    {% else %}
+        <div id='login-menu'>
+            <form class="right" name="languages" action="/i18n/setlang/" method="post">
+                <input id="language" name="language" type="hidden" value=""/>
+                <input class="flag" type="image" onclick="this.form.language.value=this.value" value="sv" src="/static/images/flags/se.gif" />
+                <input class="flag" type="image" onclick="this.form.language.value=this.value" value="en" src="/static/images/flags/us.gif" />
+            </form>
+        </div>
+    {% endif %}
+    
+    <div class="logo">
+        <a href="{% url start %}"><img src="/static/images/Wooter2.png" alt='{% trans "Wooter" %}' title="{% trans 'Wooter' %}" /></a>
+    </div>    
+{% endblock header %}
+
+{% block footer %}
+    {% if version %}<div id="version">{{ version }}</div>{% endif %}
+
+    <div id="copyright">
+        &#169; Johan Liseborn &nbsp;
+        <a href="">{% trans "About" %}</a> &nbsp;
+        <a href="">{% trans "Contact" %}</a> &nbsp;
+        <a href="">{% trans "Blog" %}</a> &nbsp;
+        <a href="">{% trans "Status" %}</a> &nbsp;
+        <a href="">{% trans "Apps" %}</a> &nbsp;
+        <a href="">{% trans "API" %}</a> &nbsp;
+        <a href="">{% trans "Search" %}</a> &nbsp;
+        <a href="">{% trans "Help" %}</a> &nbsp;
+        <a href="">{% trans "Jobs" %}</a> &nbsp;
+        <a href="">{% trans "Terms" %}</a> &nbsp;
+        <a href="">{% trans "Privacy" %}</a>
+    </div> <!-- copyright -->
+{% endblock footer %}

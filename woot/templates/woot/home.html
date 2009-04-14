@@ -1,0 +1,62 @@
+{% extends "woot/base.html" %}
+
+{% load i18n %}
+
+{% block head %}
+    {{ block.super }}
+    <meta http-equiv="refresh" content="60" />
+{% endblock %}
+
+{% block content %}
+    <h2>{% trans "What are you doing?" %}</h2>
+
+    <form method="post" action=".">
+	    <div>{{ form.text }}</div>
+
+	    <input type="submit" value="{% trans 'Woot' %}"/>
+    </form>
+    
+    <ul class='woots'>
+        {% for woot in woots %}
+            <li>
+                <div class='text'><a href="{% url user-profile woot.user.user.username %}">{{ woot.user }}</a> {{ woot.text }}</div>
+                <div class='timestamp'>{{ woot.timestamp|timesince }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
+
+{% block navigation %}
+    <h3>{{ user }}</h3>
+        
+    <table class='stats'>
+        <colgroup>
+            <col id='following' />
+            <col id='followers' />
+            <col id='updates' />
+        </colgroup>
+        <tbody>
+            <tr>
+                <td>{{ user.get_profile.following.count }}</td>
+                <td>{{ user.get_profile.followers.count }}</td>
+                <td>{{ user.get_profile.woots.count }}</td>
+            </tr>
+            <tr>
+                <th><a href="{% url following %}">{% trans "Following" %}</a></th>
+                <th><a href="{% url followers %}">{% trans "Followers" %}</a></th>
+                <th><a href="{% url user-profile user.username %}">{% trans "Updates" %}</a></th>
+            </tr>
+        </tbody>
+    </table>
+    
+    <ul class='navlinks'>
+        <li>{% trans "Replies" %}</li>
+        <li>{% trans "Direct Messages" %}</li>
+        <li>{% trans "Favorites" %}</li>
+        <li>{% trans "Everyone" %}</li>
+    </ul>
+    
+    <div>
+        <h3>{% trans "Following" %}</h3>
+    </div>
+{% endblock %}

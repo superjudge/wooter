@@ -1,0 +1,29 @@
+{% extends "woot/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <p>
+        {% trans "Wooter is a simple Twitter clone written in Python, using the Django framework. The sole purpose of Wooter is to serve as an example application for a number of Django features." %}
+    </p>
+    
+    <div id='signup'><span id='signup-link'><a href="{% url signup %}">{% trans "Join Us - Sign Up!" %}</a></span></div>
+{% endblock %}
+
+{% block navigation %}
+    {% if form.errors %}
+        <p class="error">{% trans "Sorry, that is not a valid username or password" %}</p>
+    {% endif %}
+
+    <form action='{% url login %}' method='post'>
+        <div><label for="username">{% trans "User name" %}:</label></div>
+        <div><input type="text" name="username" value="" id="username"></div>
+        <div><label for="password">{% trans "Password" %}:</label></div>
+        <div><input type="password" name="password" value="" id="password"></div>
+
+        <input type="submit" value="login" />
+        <input type="hidden" name="next" value="{% url home %}" />
+    </form>
+    
+    <p>{% trans "Forgot password?" %} <a href="/accounts/password_reset/">{% trans "Click here!" %}</a></p>
+{% endblock %}

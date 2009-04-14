@@ -1,0 +1,71 @@
+/* -*- coding: utf-8 -*-
+ *
+ * Copyright (c) 2009, Johan Liseborn <johan.liseborn@gmail.com>
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
+body, html {
+	font-family: tahoma, verdana, trebuchet, "trebuchet ms", arial, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+#signup {
+    font-size: 1.5em;
+}
+
+#signup a:hover {
+    text-decoration: none;
+}
+
+.woots .timestamp {
+    font-size: 0.7em;
+    font-style: italic;
+}
+
+.navlinks {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.stats th {
+    font-size: 0.8em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.small {
+    font-size: 0.8em;
+}

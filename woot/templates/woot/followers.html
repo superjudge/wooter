@@ -1,0 +1,37 @@
+{% extends "woot/base.html" %}
+
+{% load i18n %}
+{% load wooter %}
+
+{% block content %}
+    <h2>
+        {% ifequal user profile.user %}
+            {% blocktrans count profile.followers.count as counter %}
+                Your {{ counter }} Follower
+            {% plural %}
+                Your {{ counter }} Followers
+            {% endblocktrans %}
+        {% else %}
+            {% blocktrans count profile.followers.count as counter %}
+                {{ profile }}'s {{ counter }} Follower
+            {% plural %}
+                {{ profile }}'s {{ counter }} Followers
+            {% endblocktrans %}
+        {% endifequal %}
+    </h2>
+
+    <ul class='followers'>
+        {% for fellow in followers %}
+            <li>
+                <a href="{% url user-profile fellow.user.username %}">{{ fellow.user.username }}</a> / {{ fellow.user.first_name }} {{ fellow.user.last_name }}
+                {% ifequal user fellow.user %}
+                    <span class="right small">{% trans "That's you!" %}</span>
+                {% else %}
+                    {% ifnotmember fellow user.get_profile.following.all %}
+                        <a class="right small" href="{% url user-follow fellow.user.username %}">{% trans "follow" %}</a>
+                    {% endifnotmember %}
+                {% endifequal %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

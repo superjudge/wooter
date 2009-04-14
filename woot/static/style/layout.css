@@ -1,0 +1,94 @@
+/* -*- coding: utf-8 -*-
+ *
+ * Copyright (c) 2009, Johan Liseborn <johan.liseborn@gmail.com>
+ *
+ * Permission to use, copy, modify, and/or distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
+#hd {
+    margin: 10px 0 10px 0;
+}
+
+#hd .logo {
+    float: left;
+	padding: 1em 0 0 0.5em;
+}
+
+#ft {
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#signup {
+    text-align: center;
+}
+
+#signup-link {
+    padding: 5px 10px 5px 10px;
+    border: solid;
+    border-width: 1px;
+    border-color: #000000;
+}
+
+h1, h2, h3, .navlinks, .stats {
+    margin: 15px;
+}
+
+h4 {
+    margin: 5px 15px 0px 15px;
+}
+
+p, form {
+    margin: 15px;
+}
+
+.following li, .followers li, .woots li {
+    margin: 10px;
+    padding-bottom: 10px;
+    border-bottom: dashed;
+    border-width: 1px;
+    border-color: #AAAAAA;
+}
+
+.stats {
+    width: 100%;
+}
+
+input[type="text"], input[type="password"], input[type="textfield"] {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #A9A9A9;
+    padding: 2px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.right {
+    float: right;
+}
+
+.flag {
+    height: 15px;
+    width: 22px;
+    border: none;
+    padding: 2px 0px 2px 0px;
+}
+
+#login-menu {
+    float: right;
+    padding: 2px 1em 0em 0em;
+    text-align: right;
+}

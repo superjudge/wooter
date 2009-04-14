@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}            
+            
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        
+        <title>{% block title %}{% trans "Wooter" %}{% endblock title %}</title>
+        
+        <link rel="shortcut icon" type="image/gif" href="/static/images/favicon.gif" />
+    	<!--[if IE]>
+            <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/static/images/favicon.ico" />
+    	<![endif]-->
+
+        <meta name-equiv='cache-control' content='public' />
+        <meta name='revisit-after' content='2 days' />
+        <meta name='description' content="{% trans 'Work 7x24 is a hosted mobile workforce management system supporting time reporting, quotes, gps, position, pictures. And all this from your cell phone and web browser' %}" />
+
+        <meta name='author' content='Two Story Software AB' />
+     	<meta http-equiv="content-language" content="{{ LANGUAGE_CODE }}" />	
+
+        {% block head %}{% endblock head %}
+
+        {% block css %}
+            <style type="text/css">
+                @import url("/static/style/layout.css");
+                @import url("/static/style/type.css");
+                @import url("/static/style/color.css");
+    	    </style>
+        {% endblock css %}
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+        <script type="text/javascript">
+            var active_color = '#000';
+            var inactive_color = '#ccc';
+
+            $(document).ready(function() {
+                $("input.default-value").css("color", inactive_color);
+
+                var default_values = new Array();
+
+                $("input.default-value").focus(function() {
+                    if (!default_values[this.id]) {
+                        default_values[this.id] = this.value;
+                    }
+                
+                    if (this.value == default_values[this.id]) {
+                        this.value = '';
+                        this.style.color = active_color;
+                    }
+                
+                    $(this).blur(function() {
+                        if (this.value == '') {
+                            this.style.color = inactive_color;
+                            this.value = default_values[this.id];
+                        }
+                    });
+                });
+            });
+        </script>
+        
+        {% block javascript %}
+        	<script type="text/javascript" src="/static/js/site.js"></script>
+        {% endblock javascript %}
+    </head>
+
+    <body>
+	    <div id="header">
+            {% block header %}
+                {% if user.is_authenticated %}
+    		        <div id="login">{{ user.get_full_name }} ({{ user.get_profile.account }}) &#124; <a href="{% url settings %}">{% trans "settings" %}</a> &#124; <a href="/doc/en/_build/html/index.html" target="_blank">{% trans "documentation" %}</a> &#124; <a href="{% url logout %}">{% trans "logout" %}</a></div>
+                {% else %}
+    		        <div id="login"> 
+    		            {% if live %}
+		                    <form class="right" method='post' action='https://{{ site.domain }}{% url login %}'>
+    		            {% else %}
+    		                <form class="right" method='post' action='{% url login %}'>
+    		            {% endif %}
+		                    <table>
+		                        <tr>
+		                            <td><input id="id_username" tabindex="1" type="text" name="username" value="{% trans 'phone or email' %}" class="textinput smallinput default-value" size="15" maxlength="50" title="{% trans "Enter your username here - can be your email or mobile phone number" %}" /></td>
+                                    <td>&#160;</td>
+		                            <td><input id="id_password" tabindex="2" type="password" name="password" value="{% trans 'password' %}" class="textinput smallinput default-value" size="15" maxlength="50" title="{% trans "Enter your password here" %}"/></td>
+		                            <td>&#160;</td>
+		                            <td><input type="submit" value="{% trans "Login" %}" tabindex="3" /></td>
+		                            {% if https %}
+		                                <td><input type="hidden" name="next" value="https://{{ site.domain }}{% url home %}" /></td>
+		                            {% else %}
+		                                <td><input type="hidden" name="next" value="{% url home %}" /></td>
+		                            {% endif %}
+		                        </tr>
+		                    </table>
+		                </form>
+		            
+                        <form class="right" name="languages" action="/i18n/setlang/" method="post">
+	                        <a href="{% url signup %}">{% trans "Sign up" %}</a> &#124; <a href="{% url reset %}">{% trans "Forgot your password" %}?</a>&#160; &#160;
+                            <input id="language" name="language" type="hidden" value=""/>
+                            <input class="flag" type="image" onclick="this.form.language.value=this.value" value="sv" src="/static/images/flags/sesmall.gif" />
+                            <input class="flag" type="image" onclick="this.form.language.value=this.value" value="en" src="/static/images/flags/uksmall.gif" />
+                        </form>
+                    </div>
+                {% endif %}
+            {% endblock header %}
+
+            <div class="logo">
+		        <a href="{% url home %}"><img src="/static/images/work7x24_logo_beta150x49_blue_gr.gif" alt='{% trans "Site_Title" %}' title="{% trans 'Site_Title' %}" /></a>
+	        </div>
+        </div> <!-- header -->
+
+        {% block content %}{% endblock content %}
+
+        <div id="footer">
+	        {% block footer %}
+                {% if version %}<div id="version">{{ version }}</div>{% endif %}
+
+	            <div id="copyright">
+    		        <a href="http://wooter.se">&#169; Johan Liseborn</a>
+                </div> <!-- copyright -->
+	        {% endblock footer %}
+        </div> <!-- footer -->
+    </body>
+</html>

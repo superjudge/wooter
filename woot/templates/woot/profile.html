@@ -1,0 +1,64 @@
+{% extends "woot/base.html" %}
+
+{% load i18n %}
+{% load wooter %}
+
+{% block head %}
+    {{ block.super }}
+    <meta http-equiv="refresh" content="60" />
+{% endblock %}
+
+{% block content %}
+    <h1>{{ profile }}</h1>
+    
+    {% ifnotequal user profile.user %}
+        {% ifnotmember profile user.get_profile.following.all %}
+            <h3><a href="{% url user-follow profile.user.username %}">{% trans "Follow" %}</a></h3>
+        {% else %}            
+            <h3><a href="{% url user-unfollow profile.user.username %}">{% trans "Remove" %}</a></h3>
+        {% endifnotmember %}
+    {% endifnotequal %}
+
+    <ul class='woots'>
+        {% for woot in woots %}
+            <li>
+                <div class='text'>{{ woot.text }}</div>
+                <div class='timestamp'>{{ woot.timestamp|timesince }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
+
+{% block navigation %}
+    <h4>{% trans "Name" %} {{ profile.user.first_name }} {{ profile.user.last_name }} ({{ profile }})</h4>
+    <h4>{% trans "Location " %} {{ profile.location }}</h4>
+    
+    <table class='stats'>
+        <colgroup>
+            <col id='following' />
+            <col id='followers' />
+            <col id='updates' />
+        </colgroup>
+        <tbody>
+            <tr>
+                <td>{{ profile.following.count }}</td>
+                <td>{{ profile.followers.count }}</td>
+                <td>{{ profile.woots.count }}</td>
+            </tr>
+            <tr>
+                <th><a href="{% url user-following profile.user.username %}">{% trans "Following" %}</a></th>
+                <th><a href="{% url user-followers profile.user.username %}">{% trans "Followers" %}</a></th>
+                <th><a href="{% url user-profile profile.user.username %}">{% trans "Updates" %}</a></th>
+            </tr>
+        </tbody>
+    </table>
+    
+    <ul class='navlinks'>
+        <li>{% trans "Updates" %}</li>
+        <li>{% trans "Favorites" %}</li>
+    </ul>
+    
+    <div>
+        <h3>{% trans "Following" %}</h3>
+    </div>
+{% endblock %}
